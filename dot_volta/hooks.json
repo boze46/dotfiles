@@ -1,0 +1,10 @@
+{
+    "node": {
+        "index": {
+            "template": "https://mirrors.cernet.edu.cn/nodejs-release/index.json"
+        },
+        "distro": {
+            "template": "https://mirrors.cernet.edu.cn/nodejs-release/v{{version}}/{{filename}}"
+        }
+    }
+}
