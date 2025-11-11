@@ -1,0 +1,4 @@
+Host *
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/boze_ssh_id
+

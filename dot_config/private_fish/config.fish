@@ -16,3 +16,9 @@ set fish_cursor_external line
 # The following variable can be used to configure cursor shape in
 # visual mode, but due to fish_cursor_default, is redundant here
 set fish_cursor_visual block
+
+# 只启动 ssh-agent，不自动加载密钥
+if status is-interactive
+    # 不带密钥参数，只初始化 agent
+    eval (keychain --eval --quiet --noask)
+end
