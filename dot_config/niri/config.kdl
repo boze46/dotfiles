@@ -1,0 +1,367 @@
+// Niri Configuration for CachyOS
+// 完整文档: https://github.com/YaLTeR/niri/wiki
+
+// ════════════════════════════════════════════════════════════════
+// 输入设备配置 | Input Configuration
+// ════════════════════════════════════════════════════════════════
+
+input {
+    keyboard {
+        xkb {
+            layout "us"  // 键盘布局 | Keyboard layout
+        }
+        numlock  // 启动时开启数字键盘 | Enable numlock on startup
+    }
+
+    mouse {
+        accel-profile "flat"  // 关闭鼠标加速，1:1 线性响应 | Disable mouse acceleration
+    }
+    
+    touchpad {
+        tap             // 轻触点击 | Tap to click
+        natural-scroll  // 自然滚动 | Natural scrolling
+    }
+
+    focus-follows-mouse               // 鼠标悬停自动聚焦窗口 | Focus follows mouse
+    workspace-auto-back-and-forth     // 工作区快速切换 | Workspace back-and-forth
+}
+
+// ════════════════════════════════════════════════════════════════
+// 显示器配置 | Output Configuration
+// 运行 `niri msg outputs` 查看显示器信息
+// ════════════════════════════════════════════════════════════════
+
+// 主显示器: 小米 3440x1440@180Hz 带鱼屏 (下方)
+// Main display: Xiaomi 3440x1440@180Hz ultrawide (bottom)
+output "DP-1" {
+    mode "3440x1440@180.000"
+    scale 1.25              // 逻辑尺寸: 2752×1152 | Logical size: 2752×1152
+    position x=0 y=1152     // 位于副屏下方 | Below secondary display
+    focus-at-startup        // 启动时默认聚焦 | Focus on startup
+}
+
+// 副显示器: KTC 2560x1440@144Hz (上方)
+// Secondary display: KTC 2560x1440@144Hz (top)
+output "HDMI-A-1" {
+    mode "2560x1440@143.995"
+    scale 1.25              // 逻辑尺寸: 2048×1152 | Logical size: 2048×1152
+    position x=352 y=0      // 居中对齐: (2752-2048)/2=352 | Centered
+    // variable-refresh-rate   // 按需启用 VRR | VRR on-demand
+}
+
+// ════════════════════════════════════════════════════════════════
+// 布局设置 | Layout Settings
+// ════════════════════════════════════════════════════════════════
+
+layout {
+    gaps 12                         // 窗口间距 | Window gaps
+    center-focused-column "on-overflow"   // 不自动居中聚焦列 | Don't auto-center
+
+    background-color "transparent" // 透明背景
+
+    // border {
+    //     width 2
+    // }
+    //
+    // 预设列宽 | Preset column widths (Mod+R 切换)
+    preset-column-widths {
+        proportion 0.33333  // 1/3 屏幕宽度
+        proportion 0.5      // 1/2 屏幕宽度
+        proportion 0.66667  // 2/3 屏幕宽度
+    }
+    default-column-width {}
+
+    // 聚焦指示环 | Focus ring
+    focus-ring {
+        width 2
+        active-color "#00ac89"      // 激活窗口颜色 | Active color
+        // inactive-color "#505050"    // 非激活窗口颜色 | Inactive color
+    }
+
+    // 窗口阴影 | Window shadow
+    shadow {
+        softness 30     // 柔和度 | Softness
+        spread 5        // 扩散 | Spread
+        offset x=0 y=5  // 偏移 | Offset
+        color "#0007"   // 半透明黑色 | Semi-transparent black
+    }
+    // insert-hint {
+    //     // off
+    //     color "#ffc87f80"
+    //     gradient from="#ffbb6680" to="#ffc88080" angle=45 relative-to="workspace-view"
+    // }
+
+    struts {}  // 保留区域设置 | Reserved areas
+}
+
+
+// ════════════════════════════════════════════════════════════════
+// 快捷键绑定 | Key Bindings
+// ════════════════════════════════════════════════════════════════
+
+binds {
+    MOD+SHIFT+ESCAPE { show-hotkey-overlay; }  // 显示快捷键提示 | Show hotkey overlay
+
+    // ──────────────────────────────────────────────────────────
+    // 应用启动 | Application Launcher
+    // ──────────────────────────────────────────────────────────
+    MOD+RETURN      hotkey-overlay-title="终端 Terminal: kitty"    { spawn "kitty"; }
+    MOD+SPACE       hotkey-overlay-title="启动器 Launcher: wofi"       { spawn "wofi"; }
+    MOD+B           hotkey-overlay-title="浏览器 Browser: firefox"     { spawn "firefox"; }
+    MOD+E           hotkey-overlay-title="文件管理器 Files: nautilus"  { spawn "nautilus"; }
+    MOD+ALT+L       hotkey-overlay-title="锁屏 Lock: swaylock"         { spawn "swaylock"; }
+
+    // ──────────────────────────────────────────────────────────
+    // 音频控制 | Audio Controls (支持锁屏时使用)
+    // ──────────────────────────────────────────────────────────
+    XF86AudioRaiseVolume    allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume    allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute           allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioNext           allow-when-locked=true { spawn "playerctl" "next"; }
+    XF86AudioPause          allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPlay           allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPrev           allow-when-locked=true { spawn "playerctl" "previous"; }
+
+    // ──────────────────────────────────────────────────────────
+    // 窗口操作 | Window Management
+    // ──────────────────────────────────────────────────────────
+    MOD+Q { close-window; }  // 关闭窗口 | Close window
+
+    // 焦点切换 | Focus movement (方向键和 Vim 键位)
+    MOD+LEFT        { focus-column-left; }
+    MOD+H           { focus-column-left; }
+    MOD+RIGHT       { focus-column-right; }
+    MOD+L           { focus-column-right; }
+    MOD+UP          { focus-window-up; }
+    MOD+K           { focus-window-up; }
+    MOD+DOWN        { focus-window-down; }
+    MOD+J           { focus-window-down; }
+    MOD+R           { switch-preset-column-width; }
+
+    // 窗口移动 | Window movement
+    MOD+CTRL+LEFT   { move-column-left; }
+    MOD+CTRL+H      { move-column-left; }
+    MOD+CTRL+RIGHT  { move-column-right; }
+    MOD+CTRL+L      { move-column-right; }
+    MOD+CTRL+UP     { move-window-up; }
+    MOD+CTRL+K      { move-window-up; }
+    MOD+CTRL+DOWN   { move-window-down; }
+    MOD+CTRL+J      { move-window-down; }
+
+    // 快速跳转 | Quick jump
+    MOD+HOME        { focus-column-first; }
+    MOD+END         { focus-column-last; }
+    MOD+CTRL+HOME   { move-column-to-first; }
+    MOD+CTRL+END    { move-column-to-last; }
+
+    // ──────────────────────────────────────────────────────────
+    // 多显示器操作 | Multi-monitor
+    // ──────────────────────────────────────────────────────────
+    MOD+U           { focus-monitor-up; }       // 更方便的上屏快捷键
+    MOD+D           { focus-monitor-down; }     // 更方便的下屏快捷键
+    MOD+SHIFT+LEFT          { focus-monitor-left; }
+    MOD+SHIFT+RIGHT         { focus-monitor-right; }
+
+    MOD+SHIFT+U     { move-column-to-monitor-up; }      // 移动到上屏 | Move to top
+    MOD+SHIFT+D     { move-column-to-monitor-down; }    // 移动到下屏 | Move to bottom
+    MOD+SHIFT+CTRL+LEFT     { move-column-to-monitor-left; }
+    MOD+SHIFT+CTRL+RIGHT    { move-column-to-monitor-right; }
+
+    // ──────────────────────────────────────────────────────────
+    // 工作区切换 | Workspace Switching
+    // ──────────────────────────────────────────────────────────
+    
+    // 鼠标滚轮切换 | Mouse wheel switching
+    MOD+WHEELSCROLLDOWN         cooldown-ms=150 { focus-workspace-down; }
+    MOD+WHEELSCROLLUP           cooldown-ms=150 { focus-workspace-up; }
+    MOD+CTRL+WHEELSCROLLDOWN    cooldown-ms=150 { move-column-to-workspace-down; }
+    MOD+CTRL+WHEELSCROLLUP      cooldown-ms=150 { move-column-to-workspace-up; }
+
+    // 数字键切换工作区 | Number key workspace switching
+    MOD+1 { focus-workspace 1; }
+    MOD+2 { focus-workspace 2; }
+    MOD+3 { focus-workspace 3; }
+    MOD+4 { focus-workspace 4; }
+    MOD+5 { focus-workspace 5; }
+    MOD+6 { focus-workspace 6; }
+    MOD+7 { focus-workspace 7; }
+    MOD+8 { focus-workspace 8; }
+    MOD+9 { focus-workspace 9; }
+
+    // 移动窗口到工作区 | Move window to workspace
+    MOD+CTRL+1 { move-column-to-workspace 1; }
+    MOD+CTRL+2 { move-column-to-workspace 2; }
+    MOD+CTRL+3 { move-column-to-workspace 3; }
+    MOD+CTRL+4 { move-column-to-workspace 4; }
+    MOD+CTRL+5 { move-column-to-workspace 5; }
+    MOD+CTRL+6 { move-column-to-workspace 6; }
+    MOD+CTRL+7 { move-column-to-workspace 7; }
+    MOD+CTRL+8 { move-column-to-workspace 8; }
+    MOD+CTRL+9 { move-column-to-workspace 9; }
+
+    MOD+TAB { focus-workspace-previous; }  // 切换到上一个工作区 | Previous workspace
+
+    // ──────────────────────────────────────────────────────────
+    // 布局调整 | Layout Controls
+    // ──────────────────────────────────────────────────────────
+    MOD+CTRL+F          { expand-column-to-available-width; }  // 展开列至最大 | Expand column
+    MOD+C               { center-column; }                     // 居中当前列 | Center column
+    MOD+CTRL+C          { center-visible-columns; }            // 居中所有可见列 | Center all
+    MOD+MINUS           { set-column-width "-10%"; }           // 减小列宽 | Decrease width
+    MOD+EQUAL           { set-column-width "+10%"; }           // 增加列宽 | Increase width
+    MOD+SHIFT+MINUS     { set-window-height "-10%"; }          // 减小窗口高度 | Decrease height
+    MOD+SHIFT+EQUAL     { set-window-height "+10%"; }          // 增加窗口高度 | Increase height
+
+    // ──────────────────────────────────────────────────────────
+    // 窗口模式 | Window Modes
+    // ──────────────────────────────────────────────────────────
+    MOD+T { toggle-window-floating; }       // 浮动窗口 | Toggle floating
+    MOD+F { fullscreen-window; }            // 全屏 | Fullscreen
+    MOD+W { toggle-column-tabbed-display; } // 标签模式 | Toggle tabbed
+
+    // ──────────────────────────────────────────────────────────
+    // 截图 | Screenshots
+    // ──────────────────────────────────────────────────────────
+    CTRL+SHIFT+1 { screenshot; }         // 区域截图 | Screenshot area
+    CTRL+SHIFT+2 { screenshot-screen; }  // 全屏截图 | Screenshot screen
+    CTRL+SHIFT+3 { screenshot-window; }  // 窗口截图 | Screenshot window
+
+    // ──────────────────────────────────────────────────────────
+    // 系统控制 | System Controls
+    // ──────────────────────────────────────────────────────────
+    MOD+ESCAPE          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }  // 恢复快捷键 | Restore shortcuts
+    MOD+O               repeat=false { toggle-overview; }   // 概览视图 | Toggle overview
+    MOD+SHIFT+P         { power-off-monitors; }             // 关闭显示器 | Turn off monitors
+    CTRL+ALT+DELETE     { quit; }                           // 退出 niri | Quit niri
+}
+
+// ════════════════════════════════════════════════════════════════
+// 自启动应用 | Startup Applications
+// ════════════════════════════════════════════════════════════════
+
+spawn-at-startup "polkit-kde-authentication-agent"  // 权限认证 | Polkit authentication
+// spawn-at-startup "swww-daemon"                      // 壁纸守护进程 | Wallpaper daemon
+// spawn-at-startup "waybar"                           // 状态栏 | Status bar
+spawn-at-startup "dms" "run"
+
+
+// spawn-at-startup "sh" "-c" "sleep 1 && swww img /usr/share/wallpapers/cachyos-wallpapers/Skyscraper.png"
+
+// Clipboard history
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+// (Optional) replace with a polkit agent for escalation prompts
+// spawn-at-startup "{{POLKIT_AGENT_PATH}}"
+
+prefer-no-csd       // 禁用客户端装饰 | Disable client-side decorations
+screenshot-path null // 截图不保存到文件 | Don't save screenshots to file
+
+
+// ════════════════════════════════════════════════════════════════
+// 动画设置 | Animation Settings
+// ════════════════════════════════════════════════════════════════
+
+animations {
+    // 工作区切换 | Workspace switch (弹簧动画)
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+
+    // 窗口打开/关闭 | Window open/close (缓动曲线)
+    window-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    window-close {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+
+    // 窗口移动/调整 | Window movement/resize (弹簧动画)
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+
+    // 通知和截图动画 | Notification and screenshot animations
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
+    }
+    screenshot-ui-open {
+        duration-ms 300
+        curve "ease-out-quad"
+    }
+
+    // 概览视图 | Overview
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+}
+
+// ════════════════════════════════════════════════════════════════
+// 窗口规则 | Window Rules
+// ════════════════════════════════════════════════════════════════
+
+// Firefox 画中画窗口浮动显示 | Firefox PiP floating
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+// Bitwarden 窗口浮动显示 | Bitwarden floating (包括浏览器扩展窗口)
+window-rule {
+  match title=r#"Bitwarden"#
+  open-floating true
+}
+
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    match app-id="Alacritty"
+    match app-id="zen"
+    match app-id="com.mitchellh.ghostty"
+    match app-id="kitty"
+    draw-border-with-background false
+}
+
+// 所有窗口圆角 | Rounded corners for all windows
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+    tiled-state true
+    draw-border-with-background false
+}
+
+// ════════════════════════════════════════════════════════════════
+// 环境变量 | Environment Variables
+// ════════════════════════════════════════════════════════════════
+
+environment {
+    DISPLAY ":0"
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
+    XDG_SESSION_TYPE "wayland"
+
+}
+
+// 快捷键提示 | Hotkey overlay
+hotkey-overlay {
+    skip-at-startup  // 启动时不显示 | Don't show on startup
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
