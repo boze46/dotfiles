@@ -106,7 +106,7 @@ binds {
     // 应用启动 | Application Launcher
     // ──────────────────────────────────────────────────────────
     MOD+RETURN      hotkey-overlay-title="终端 Terminal: kitty"    { spawn "kitty"; }
-    MOD+SPACE       hotkey-overlay-title="启动器 Launcher: wofi"       { spawn "wofi"; }
+    ALT+SPACE       hotkey-overlay-title="启动器 Launcher: wofi"       { spawn "wofi"; }
     MOD+B           hotkey-overlay-title="浏览器 Browser: firefox"     { spawn "firefox"; }
     MOD+E           hotkey-overlay-title="文件管理器 Files: nautilus"  { spawn "nautilus"; }
     MOD+ALT+L       hotkey-overlay-title="锁屏 Lock: swaylock"         { spawn "swaylock"; }
