@@ -1,99 +1,165 @@
-#
-# zephyr.toml - Zephyr default prompt theme
-#
-
-add_newline = false
-
-# A minimal left prompt
-format = """$python$directory$character"""
-
-# move the rest of the prompt to the right
-#right_format = """$status$git_branch${custom.git_status_dirty}$git_status"""
-right_format = """$status$cmd_duration$git_branch${custom.git_status_dirty}$git_status"""
-
-palette="wombat"
-
-# Define custom colors
-[palettes.tokyo_night]
-black = '#15161e'
-blue = '#7aa2f7'
-cyan = '#7dcfff'
-green = '#9ece6a'
-purple = '#bb9af7'
-red = '#f7768e'
-white = '#a9b1d6'
-yellow = '#e0af68'
-
-[palettes.tokyo_night_256]
-black = '16'
-blue = '111'
-cyan = '117'
-green = '149'
-purple = '141'
-red = '210'
-white = '146'
-yellow = '179'
-
-[palettes.wombat]
-black = '#000000'
-blue = '#5da9f6'
-cyan = '#82fff7'
-green = '#b1e969'
-purple = '#e86aff'
-red = '#ff615a'
-white = '#dedacf'
-yellow = '#ebd99c'
-
-[palettes.wombat_256]
-black = '0'
-blue = '75'
-cyan = '123'
-green = '149'
-purple = '171'
-red = '203'
-white = '188'
-yellow = '223'
-
-[character]
-success_symbol = "[❯](purple)[❯](cyan)"
-error_symbol = "[❯](yellow)[❯](red)"
-vicmd_symbol = "[❮](purple)[❮](cyan)"
-
-[python]
-format = '[(\($virtualenv\) )]($style)'
-style = 'white'
-
+add_newline = true
+scan_timeout = 500
+command_timeout = 5000
+format = '$all$line_break$env_var$character'
+ 
+[env_var.VIRTUAL_ENV]
+format = 'venv:[$env_value]($style) '
+style = 'yellow bold'
+ 
+[time]
+disabled = false
+format = '🕙[$time]($style) '
+ 
 [directory]
-style = "blue"
-truncation_length = 1
-truncation_symbol = ""
-fish_style_pwd_dir_length = 1
+format = "[💻Boze ](243)[📂 $path]($style)[$read_only]($read_only_style)[](243) "
+style = "bg:243"
+read_only_style = "bg:243"
+truncation_symbol = '…/'
 
-# right prompt uses left space padding
-[git_branch]
-format = ' [$branch]($style)'
-style = 'green'
+[battery]  
+full_symbol = '🔋 '  
+charging_symbol = '🔌 '  
+discharging_symbol = '⚡️ '  
+unknown_symbol = '❓ '  
+empty_symbol = '🪫⚡️0%'  
+format = '[$symbol$percentage]($style) '  
 
-[git_status]
-format = '( [\[$ahead_behind$stashed\]]($style))'
-style = "cyan"
-stashed = "≡"
-ahead = "⇡${count}"
-behind = "⇣${count}"
+# 当电量在 0% 到 29% 之间时  
+[[battery.display]]  
+threshold = 30  
+style = 'bold red'  
+discharging_symbol = '⚡️'  
+  
+# 当电量在 30% 到 69% 之间时  
+[[battery.display]]  
+threshold = 70  
+style = 'bold yellow'  
+discharging_symbol = '🔋⚡️'
 
-[custom.git_status_dirty]
-when = 'test -n "$(git status --porcelain 2>/dev/null)"'
-symbol = "•"
-style = "white"
-format="[$symbol]($style)"
-shell = ["sh"]
+# 当电量在 30% 到 100% 之间时  
+[[battery.display]]
+style = 'bold green'  
+discharging_symbol = '🔋⚡️' # 或者你选择的符号  
+charging_symbol = '🔋🔌' # 充电时的符号
 
 [cmd_duration]
-format = ' [$duration]($style)'
+min_time = 100
+format = '🐌[$duration](bold yellow) '
+ 
+[aws]
+symbol = "☁️ "
+ 
+[buf]
+symbol = "🦬 "
 
-[line_break]
-disabled = true
-
-[status]
-disabled = false
-symbol = ' ✘'
+[c]
+symbol = "C "
+ 
+[conda]
+format = '[$symbol$environment](dimmed green) '
+symbol = "🅒 "
+ 
+[dart]
+format = 'via [🔰 $version](bold red) '
+symbol = "🎯 "
+ 
+[docker_context]
+symbol = "🐳 "
+format = 'via [🐋 $context](blue bold)'
+ 
+[elixir]
+symbol = "🔮 "
+ 
+[elm]
+symbol = "🌳 "
+format = 'via [ $version](cyan bold) '
+ 
+[fossil_branch]
+symbol = '🦎 '
+truncation_length = 4
+truncation_symbol = ''
+ 
+[git_branch]
+symbol = "🌱 "
+format = "[$symbol$branch(:$remote_branch)]($style) "
+style = "bold yellow"
+ 
+[git_status]
+conflicted = '🏳'
+ahead = '🏎💨'
+behind = '😰'
+diverged = '😵'
+up_to_date = '✓'
+untracked = '🤷'
+stashed = '📦'
+modified = '📝'
+staged = '[++\($count\)](green)'
+renamed = '👅'
+deleted = '🗑'
+ 
+[golang]
+symbol = "🐹 "
+format = 'via [🏎💨 $version](bold cyan) '
+ 
+[guix_shell]
+symbol = "🐃 "
+format = 'via [🐂](yellow bold) '
+ 
+[haskell]
+symbol = " "
+ 
+[haxe]
+symbol = " "
+ 
+[hg_branch]
+symbol = " "
+ 
+[hostname]
+ssh_symbol = " "
+ 
+[java]
+symbol = '🌟 '
+ 
+[julia]
+symbol = " "
+ 
+[lua]
+symbol = "🌙 "
+format = 'via [🌕 $version](bold blue) '
+ 
+[meson]
+symbol = "󰔷 "
+ 
+[nim]
+symbol = "󰆥 "
+ 
+[nix_shell]
+symbol = " "
+ 
+[nodejs]
+symbol = " "
+format = 'via [🤖 $version](bold green) '
+ 
+[package]
+symbol = "📦 "
+format = 'is [$symbol$version]($style) '
+style = '208 bold'
+ 
+[pijul_channel]
+symbol = " "
+ 
+[python]
+symbol = "🐍 "
+ 
+[erlang]
+symbol = "󰟔 "
+ 
+[ruby]
+symbol = " "
+ 
+[rust]
+symbol = " "
+ 
+[scala]
+symbol = " "
