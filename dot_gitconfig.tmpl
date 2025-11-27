@@ -1,6 +1,7 @@
 [user]
 	name = boze
 	email = boze3141@gmail.com
+{{- if ne .chezmoi.hostname "BozeApex" }}
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
@@ -11,3 +12,4 @@
 	defaultBranch = main
 [credential]
 	helper = store
+{{- end }}
