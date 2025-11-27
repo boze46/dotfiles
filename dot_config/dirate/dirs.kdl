@@ -1,0 +1,39 @@
+/**
+Dirate KDL template
+------------------------------------------------------------
+- Must start with the root node `home`.
+- Supported XDG user-dirs (all lowercase keys):
+  desktop, download, templates, publicshare,
+  documents, music, pictures, videos
+- String value renames the folder on disk.
+- Extra folders are allowed anywhere; they will be created.
+*/
+
+home {
+  // Rename user-dirs by providing a string value
+  download "inbox"
+  documents "docs"
+
+  // Keep the same name
+  desktop
+
+  // Group user-dirs under a custom folder
+  system {
+    templates "tmpl"
+    publicshare "public"
+  }
+
+  // Media hub with nested folders
+  media {
+    videos
+    music "audio"
+    pictures "images" {
+      // Non-user-dirs are created as-is
+      bg
+      avatar
+    }
+  }
+
+  // Any extra non-user-dirs you want Dirate to create
+  projects
+}
