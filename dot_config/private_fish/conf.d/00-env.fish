@@ -8,7 +8,7 @@ set -gx VISUAL nvim
 
 set -g fish_history_limit 10000
 
-set -gx VOLTA_HOME "$XDG_CONFIG_DIR/volta"
+set -gx VOLTA_HOME "$XDG_CONFIG_HOME/volta"
 
 set -gx NPM_CONFIG_USERCONFIG "$XDG_CONFIG_HOME/npm/npmrc"
 set -gx NPM_CONFIG_CACHE "$XDG_CACHE_HOME/npm"
