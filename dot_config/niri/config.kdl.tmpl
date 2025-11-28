@@ -126,7 +126,8 @@ binds {
     // ──────────────────────────────────────────────────────────
     // 窗口操作 | Window Management
     // ──────────────────────────────────────────────────────────
-    MOD+ALT+Q { close-window; }
+    MOD+Q { close-window; }
+    MOD+S               repeat=false { toggle-overview; }
 
     // 焦点切换 | Focus movement (方向键 + Vim 键位)
     MOD+LEFT        hotkey-overlay-title="聚焦左侧列"    { focus-column-left; }
@@ -244,7 +245,6 @@ binds {
     // 系统控制 | System Controls
     // ──────────────────────────────────────────────────────────
     MOD+ESCAPE          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-    MOD+Q               repeat=false { toggle-overview; }
     MOD+SHIFT+P         { power-off-monitors; }
     CTRL+ALT+DELETE     { quit; }
 }
