@@ -1,0 +1,31 @@
+// ════════════════════════════════════════════════════════════════
+// 输入设备配置 | Input Configuration
+// ════════════════════════════════════════════════════════════════
+
+input {
+    // 键盘
+    keyboard {
+        xkb { 
+            layout "us" 
+        }
+        numlock
+    }
+
+    // 鼠标加速
+    // 禁用鼠标加速
+    mouse { 
+        accel-profile "flat" 
+    }
+    // 始终选中鼠标所选窗口
+    focus-follows-mouse
+
+    
+
+    // 触控板
+    touchpad {
+        tap
+        natural-scroll
+    }
+    // 工作区
+    workspace-auto-back-and-forth
+}

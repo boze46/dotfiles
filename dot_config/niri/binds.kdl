@@ -1,103 +1,3 @@
-// Niri Configuration for CachyOS
-// 完整文档: https://github.com/YaLTeR/niri/wiki
-
-// ════════════════════════════════════════════════════════════════
-// 输入设备配置 | Input Configuration
-// ════════════════════════════════════════════════════════════════
-
-input {
-    keyboard {
-        xkb {
-            layout "us"
-        }
-        numlock
-    }
-
-    mouse {
-        accel-profile "flat"
-    }
-    
-    touchpad {
-        tap
-        natural-scroll
-    }
-
-    focus-follows-mouse
-    workspace-auto-back-and-forth
-}
-
-
-// ════════════════════════════════════════════════════════════════
-// 显示器配置 | Output Configuration
-// ════════════════════════════════════════════════════════════════
-
-
-{{- if eq .chezmoi.hostname "BozeApex" }}
-output "Shenzhen KTC Technology Group H27T22 0x00000001" {
-    // mode "2560x1440@143.995"
-    mode "2560x1440@143.995"
-    scale 1.25
-    position x=352 y=0
-}
-output "Xiaomi Corporation Mi monitor 5323110156479" {
-    mode "3440x1440@180.000"
-    scale 1.25
-    position x=0 y=1152
-    focus-at-startup
-}
-{{- end }}
-{{- if ne .chezmoi.hostname "BozeApex" }}
-output "DP-1" {
-    mode "1920x1080@60.000"
-    scale 1
-    position x=0 y=0
-    focus-at-startup
-}
-{{- end }}
-
-// ════════════════════════════════════════════════════════════════
-// 布局设置 | Layout Settings
-// ════════════════════════════════════════════════════════════════
-
-layout {
-    gaps 8
-    center-focused-column "on-overflow"
-    background-color "transparent"
-    always-center-single-column
-
-    preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-        proportion 1.0
-    }
-    default-column-width {}
-
-    focus-ring {
-        width 2
-        // active-color "#00ac89"
-        // background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-        active-gradient from="#84fab0" to="#8fd3f4" angle=120
-    }
-
-    shadow {
-        softness 30
-        spread 5
-        offset x=0 y=5
-        color "#0007"
-    }
-
-    struts {}
-}
-
-
-
-
-// ════════════════════════════════════════════════════════════════
-// 快捷键绑定 | Key Bindings
-// ════════════════════════════════════════════════════════════════
-
-
 binds {
     MOD+SHIFT+ESCAPE { show-hotkey-overlay; }
 
@@ -105,8 +5,9 @@ binds {
     // 应用启动 | Application Launcher
     // ──────────────────────────────────────────────────────────
     MOD+RETURN      hotkey-overlay-title="终端 Terminal: kitty"        { spawn "kitty"; }
+    MOD+SHIFT+RETURN      hotkey-overlay-title="终端 Terminal: ghostty"        { spawn "ghostty" "+new-window"; }
     ALT+SPACE       hotkey-overlay-title="启动器 Launcher: wofi"       { spawn "wofi"; }
-    MOD+SPACE       hotkey-overlay-title="启动器 Launcher: wofi"       { spawn "wofi"; }
+    //MOD+SPACE       hotkey-overlay-title="启动器 Launcher: wofi"       { spawn "wofi"; }
     MOD+B           hotkey-overlay-title="浏览器 Browser: zen-browser" { spawn "zen-browser"; }
     MOD+E           hotkey-overlay-title="文件管理器 Files: nautilus"  { spawn "nautilus"; }
     MOD+ALT+L       hotkey-overlay-title="锁屏 Lock: swaylock"         { spawn "swaylock"; }
@@ -126,14 +27,14 @@ binds {
     // ──────────────────────────────────────────────────────────
     // 窗口操作 | Window Management
     // ──────────────────────────────────────────────────────────
-    MOD+ALT+Q { close-window; }
-    MOD+Q               repeat=false hotkey-overlay-title="切换概览模式" { toggle-overview; }
+    MOD+Q { close-window; }
+    MOD+TAB               repeat=false hotkey-overlay-title="切换概览模式" { toggle-overview; }
 
     // 焦点切换 | Focus movement (WASD 布局 - 最高优先级)
     MOD+W           hotkey-overlay-title="聚焦上方窗口/工作区"     { focus-window-or-workspace-up; }
     MOD+S           hotkey-overlay-title="聚焦下方窗口/工作区"     { focus-window-or-workspace-down; }
-    MOD+A           hotkey-overlay-title="聚焦左侧列"              { focus-column-left-or-last; }
-    MOD+D           hotkey-overlay-title="聚焦右侧列"              { focus-column-right-or-first; }
+    MOD+A           hotkey-overlay-title="聚焦左侧列"              { focus-column-left; }
+    MOD+D           hotkey-overlay-title="聚焦右侧列"              { focus-column-right; }
 
     MOD+UP          hotkey-overlay-title="聚焦上方窗口/工作区"     { focus-window-or-workspace-up; }
     MOD+DOWN        hotkey-overlay-title="聚焦下方窗口/工作区"     { focus-window-or-workspace-down; }
@@ -143,13 +44,13 @@ binds {
     // 窗口/列移动 | Window/Column movement (MOD+ALT+WASD)
     MOD+ALT+W       hotkey-overlay-title="移动窗口到上方" { move-window-up-or-to-workspace-up; }
     MOD+ALT+S       hotkey-overlay-title="移动窗口到下方" { move-window-down-or-to-workspace-down; }
-    MOD+ALT+A       hotkey-overlay-title="移动列到左侧"  { swap-window-left; }
-    MOD+ALT+D       hotkey-overlay-title="移动列到右侧"  { swap-window-right; }
+    MOD+ALT+A           hotkey-overlay-title="聚焦左侧列"              { consume-or-expel-window-left; }
+    MOD+ALT+D           hotkey-overlay-title="聚焦右侧列"              { consume-or-expel-window-right; }
 
     MOD+ALT+UP      hotkey-overlay-title="移动窗口到上方" {  move-window-up-or-to-workspace-up; }
     MOD+ALT+DOWN    hotkey-overlay-title="移动窗口到下方" { move-window-down-or-to-workspace-down; }
-    MOD+ALT+LEFT    hotkey-overlay-title="移动列到左侧"  { move-column-left; }
-    MOD+ALT+RIGHT   hotkey-overlay-title="移动列到右侧"  { move-column-right; }
+    MOD+ALT+LEFT    hotkey-overlay-title="移动列到左侧"  { consume-or-expel-window-left; }
+    MOD+ALT+RIGHT   hotkey-overlay-title="移动列到右侧"  { consume-or-expel-window-right; }
 
     // 快速跳转 | Quick jump
     MOD+HOME        hotkey-overlay-title="跳转到第一列"  { focus-column-first; }
@@ -187,7 +88,7 @@ binds {
     MOD+ALT+4 { move-column-to-workspace 4; }
     MOD+ALT+5 { move-column-to-workspace 5; }
 
-    MOD+TAB { focus-workspace-previous; }
+    // MOD+TAB { focus-workspace-previous; }
 
     // ──────────────────────────────────────────────────────────
     // 多显示器操作 | Multi-monitor
@@ -242,120 +143,3 @@ binds {
     MOD+ALT+P           { power-off-monitors; }
     CTRL+ALT+DELETE     { quit; }
 }
-
-
-// ════════════════════════════════════════════════════════════════
-// 自启动应用 | Startup Applications
-// ════════════════════════════════════════════════════════════════
-
-spawn-at-startup "polkit-kde-authentication-agent"
-spawn-at-startup "dms" "run"
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-
-prefer-no-csd
-screenshot-path null
-
-
-// ════════════════════════════════════════════════════════════════
-// 动画设置 | Animation Settings
-// ════════════════════════════════════════════════════════════════
-
-animations {
-    workspace-switch {
-        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
-    }
-
-    window-open {
-        duration-ms 200
-        curve "ease-out-quad"
-    }
-    window-close {
-        duration-ms 200
-        curve "ease-out-cubic"
-    }
-
-    horizontal-view-movement {
-        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
-    }
-    window-movement {
-        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
-    }
-    window-resize {
-        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
-    }
-
-    config-notification-open-close {
-        spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
-    }
-    screenshot-ui-open {
-        duration-ms 300
-        curve "ease-out-quad"
-    }
-
-    overview-open-close {
-        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
-    }
-}
-
-// ════════════════════════════════════════════════════════════════
-// 窗口规则 | Window Rules
-// ════════════════════════════════════════════════════════════════
-
-window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
-}
-
-window-rule {
-    match title=r#"Bitwarden"#
-    open-floating true
-}
-
-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    match app-id="Alacritty"
-    match app-id="zen"
-    match app-id="com.mitchellh.ghostty"
-    match app-id="kitty"
-    draw-border-with-background false
-}
-
-window-rule {
-    geometry-corner-radius 12
-    clip-to-geometry true
-    tiled-state true
-    draw-border-with-background false
-}
-
-
-
-// ════════════════════════════════════════════════════════════════
-// 环境变量 | Environment Variables
-// ════════════════════════════════════════════════════════════════
-
-environment {
-    DISPLAY ":0"
-    XDG_CURRENT_DESKTOP "niri"
-    QT_QPA_PLATFORM "wayland"
-    ELECTRON_OZONE_PLATFORM_HINT "auto"
-    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
-    QT_QPA_PLATFORMTHEME "qt6ct"
-    QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
-    XDG_SESSION_TYPE "wayland"
-}
-
-// 快捷键提示 | Hotkey overlay
-hotkey-overlay {
-    skip-at-startup
-}
-
-layer-rule {
-    match namespace="dms:blurwallpaper"
-    place-within-backdrop true
-}
-
-layer-rule {
-    match namespace="^quickshell$"
-    place-within-backdrop true
-}
-
