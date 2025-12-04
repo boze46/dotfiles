@@ -2,10 +2,6 @@ if type -q starship
     starship init fish | source
 end
 
-if type -q zoxide
-    zoxide init fish | source
-end
-
 fish_vi_key_bindings
 
 # Emulates vim's cursor shape behavior
