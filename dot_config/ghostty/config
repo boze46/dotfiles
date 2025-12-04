@@ -1,0 +1,53 @@
+# ============================================================================
+# Ghostty 配置文件 - 最佳实践
+# ============================================================================
+# 位置: ~/.config/ghostty/config
+# 文档: https://ghostty.org/docs/config/reference
+
+# config-file = ~/.config/ghostty/config-dankcolors
+
+# 主题
+theme = TokyoNight Night
+background-opacity = 0.75
+window-padding-color = extend
+
+# 字体设置
+font-family = monospace
+font-size = 14
+
+# 调整单元格高度（改善行距）
+adjust-cell-height = 10%
+# 调整单元格宽度
+# adjust-cell-width = 0
+
+
+# 窗口内边距（水平和垂直）
+# 格式: 单值 = 四边相同, 两值 = 左右,上下
+window-padding-x = 4
+window-padding-y = 4
+# 新窗口/标签页继承字体大小
+window-inherit-font-size = true
+
+# 右键点击行为
+# 选项: context-menu | paste | copy | copy-or-paste | ignore
+right-click-action = context-menu
+# 选中文本时自动复制到剪贴板
+# copy-on-select = true
+# 链接点击行为
+# 可选: clickable | disabled
+# link-action = clickable
+
+# 启用 shell 集成（自动检测和注入）
+# 支持: fish, bash, zsh
+shell-integration = detect
+# Shell 集成功能
+# 选项: cursor | sudo | title
+shell-integration-features = cursor,sudo,title
+
+# 异步 I/O 后端（仅 Linux）
+# 选项: auto | epoll | io_uring
+async-backend = auto
+
+# 应用内通知（GTK）
+# 选项: true | false | 具体通知名称列表
+app-notifications = clipboard-copy,config-reload
