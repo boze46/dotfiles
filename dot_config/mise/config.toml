@@ -1,0 +1,12 @@
+[tools]
+bun = "latest"
+java = "temurin-21"
+node = "lts"
+"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@boze46/dirate" = "latest"
+"npm:@openai/codex" = "latest"
+"npm:degit" = "latest"
+python = "3.12"
+uv = "latest"
+
+[env]
