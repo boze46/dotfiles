@@ -15,6 +15,7 @@ include "binds.kdl"
 // 自启动应用 | Startup Applications
 include "startup.kdl"
 
+// 请求无标题栏
 prefer-no-csd
 screenshot-path null
 

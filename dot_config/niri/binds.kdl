@@ -118,7 +118,7 @@ binds {
 
     // 列操作 | Column operations
     MOD+ALT+F           hotkey-overlay-title="展开列至最大宽度"  { expand-column-to-available-width; }
-    MOD+C               hotkey-overlay-title="居中当前列"        { center-column; }
+    MOD+SPACE               hotkey-overlay-title="居中当前列"        { center-column; }
     MOD+ALT+C           hotkey-overlay-title="居中所有可见列"    { center-visible-columns; }
 
     // Consume/Expel (合并/分离窗口到列)
