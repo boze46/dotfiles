@@ -4,28 +4,27 @@ echo "正在配置系统级 locale..."
 # 确保需要的 locale 已生成
 REQUIRED_LOCALES=("en_US.UTF-8" "en_DK.UTF-8" "zh_CN.UTF-8")
 for locale in "${REQUIRED_LOCALES[@]}"; do
-    if ! locale -a | grep -q "^${locale%.*}"; then
-        echo "警告: $locale 未生成，请检查 /etc/locale.gen"
-    fi
+  if ! locale -a | grep -q "^${locale%.*}"; then
+    echo "警告: $locale 未生成，请检查 /etc/locale.gen"
+  fi
 done
 # 使用 localectl 设置系统级 locale（推荐方式）
-if command -v localectl &> /dev/null; then
-    sudo localectl set-locale \
-        LANG=en_US.UTF-8 \
-        LC_TIME=en_DK.UTF-8 \
-        LC_PAPER=en_DK.UTF-8 \
-        LC_MEASUREMENT=en_DK.UTF-8 \
-        LC_COLLATE=C
+if command -v localectl &>/dev/null; then
+  sudo localectl set-locale \
+    LANG=en_US.UTF-8 \
+    LC_TIME=en_DK.UTF-8 \
+    LC_PAPER=en_DK.UTF-8 \
+    LC_MEASUREMENT=en_DK.UTF-8 \
     echo "✓ 系统级 locale 已通过 localectl 设置"
 else
-    # 备用方案：直接写入文件
-    echo "localectl 不可用，直接写入 /etc/locale.conf"
-    cat << 'LOCALE_EOF' | sudo tee /etc/locale.conf > /dev/null
+  # 备用方案：直接写入文件
+  echo "localectl 不可用，直接写入 /etc/locale.conf"
+  cat <<'LOCALE_EOF' | sudo tee /etc/locale.conf >/dev/null
 LANG=en_US.UTF-8
 LC_TIME=en_DK.UTF-8
 LC_PAPER=en_DK.UTF-8
 LC_MEASUREMENT=en_DK.UTF-8
 LC_COLLATE=C
 LOCALE_EOF
-    echo "✓ 系统级 locale 已写入 /etc/locale.conf"
+  echo "✓ 系统级 locale 已写入 /etc/locale.conf"
 fi
