@@ -1,7 +1,3 @@
-if type -q starship
-    starship init fish | source
-end
-
 fish_vi_key_bindings
 
 # Emulates vim's cursor shape behavior
@@ -19,19 +15,23 @@ set fish_cursor_external line
 # visual mode, but due to fish_cursor_default, is redundant here
 set fish_cursor_visual block
 
+if command -q starship
+    starship init fish | source
+end
+
+# zoxide
+if command -q zoxide
+    zoxide init fish | source
+    alias cd="z"
+end
+
 # 只启动 ssh-agent，不自动加载密钥
-if type -q keychain
+if command -q keychain
     # 不带密钥参数，只初始化 agent
     eval (keychain --eval --quiet --noask)
 end
 
-if status is-interactive
-end
-
-if type -q mise
+# mise
+if command -q mise
     mise activate fish | source
-end
-
-if type -q bzfm
-    bzfm init fish | source
 end
