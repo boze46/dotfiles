@@ -1,4 +1,7 @@
 # Langauge
+if set -q LC_ALL
+    set -e LC_ALL
+end
 set -gx LANG zh_CN.UTF-8
 
 # XDG DIR Settings
