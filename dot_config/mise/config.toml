@@ -1,6 +1,5 @@
 [tools]
 bun = "latest"
-java = "temurin-21"
 node = "lts"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@boze46/dirate" = "latest"
@@ -9,4 +8,7 @@ node = "lts"
 python = "3.12"
 uv = "latest"
 
-[env]
+[settings]
+
+[settings.node]
+mirror_url = "https://mirrors.ustc.edu.cn/node/"
