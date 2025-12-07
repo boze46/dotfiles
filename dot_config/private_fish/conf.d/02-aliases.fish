@@ -21,3 +21,5 @@ alias aria2-log='tail -f ~/.config/aria2/aria2.log'
 
 # trash
 alias rm='trash'
+
+alias ff='fastfetch'

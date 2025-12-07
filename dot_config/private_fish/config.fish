@@ -35,3 +35,8 @@ end
 if command -q mise
     mise activate fish | source
 end
+
+# fzf
+# if command -q fzf
+#     fzf --fish
+# end
