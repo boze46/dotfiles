@@ -10,7 +10,7 @@ binds {
     // 应用启动 | Application Launcher
     // ──────────────────────────────────────────────────────────
     MOD+RETURN      hotkey-overlay-title="终端 Terminal: ghostty"        { spawn "ghostty" "+new-window"; }
-    ALT+SPACE       hotkey-overlay-title="启动器 Launcher: wofi"       { spawn "wofi"; }
+    ALT+SPACE       hotkey-overlay-title="启动器 Launcher: fuzzel"       { spawn "fuzzel"; }
     MOD+B           hotkey-overlay-title="浏览器 Browser: zen-browser" { spawn "zen-browser"; }
     MOD+E           hotkey-overlay-title="文件管理器 Files: nautilus"  { spawn "nautilus"; }
     MOD+ALT+L       hotkey-overlay-title="锁屏 Lock: swaylock"         { spawn "swaylock"; }

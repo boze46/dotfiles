@@ -1,0 +1,64 @@
+// Niri Configuration for CachyOS
+// 完整文档: https://github.com/YaLTeR/niri/wiki
+
+environment {
+    LANG "zh_CN.UTF-8"
+    LC_CTYPE "zh_CN.UTF-8"
+    LC_NUMERIC "zh_CN.UTF-8"
+    LC_TIME "zh_CN.UTF-8"
+    LC_COLLATE "C"
+    LC_MONETARY "zh_CN.UTF-8"
+    LC_MESSAGES "zh_CN.UTF-8"
+    LC_PAPER "zh_CN.UTF-8"
+    LC_NAME "zh_CN.UTF-8"
+    LC_ADDRESS "zh_CN.UTF-8"
+    LC_TELEPHONE "zh_CN.UTF-8"
+    LC_MEASUREMENT "zh_CN.UTF-8"
+    LC_IDENTIFICATION "zh_CN.UTF-8"
+
+    DISPLAY ":1"
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    // QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
+    XDG_SESSION_TYPE "wayland"
+}
+
+include "input.kdl"
+
+// 显示器配置 | Output Configuration
+include "output.kdl"
+
+// 布局设置 | Layout Settings
+include "layout.kdl"
+
+// 快捷键绑定 | Key Bindings
+include "binds.kdl"
+
+// 自启动应用 | Startup Applications
+include "startup.kdl"
+
+prefer-no-csd
+screenshot-path null
+
+
+// 动画设置 | Animation Settings
+include "animations.kdl"
+
+// 窗口规则 | Window Rules
+include "rules.kdl"
+
+// Notalia
+{{- if eq .chezmoi.hostname "BozePatience" }}
+include "noctalia.kdl"
+{{- end }}
+
+// 环境变量 | Environment Variables
+// include "env.kdl"
+
+// 快捷键提示 | Hotkey overlay
+hotkey-overlay {
+    skip-at-startup
+}

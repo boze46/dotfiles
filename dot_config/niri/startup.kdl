@@ -1,4 +1,0 @@
-spawn-at-startup "polkit-kde-authentication-agent"
-// spawn-at-startup "dms" "run"
-spawn-at-startup "qs" "-c" "noctalia-shell"
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"

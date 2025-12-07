@@ -1,0 +1,14 @@
+{{- if eq .chezmoi.hostname "BozePatience" }}
+
+spawn-at-startup "qs" "-c" "noctalia-shell"
+
+{{- end }}
+{{- if ne .chezmoi.hostname "BozePatience" }}
+
+spawn-at-startup "dms" "run"
+
+{{- end }}
+
+spawn-at-startup "polkit-kde-authentication-agent"
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+
