@@ -6,6 +6,7 @@ node = "24"
 "npm:@openai/codex" = "latest"
 "npm:degit" = "latest"
 python = "3.12"
+usage = "latest"
 uv = "latest"
 
 [settings]
