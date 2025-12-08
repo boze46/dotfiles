@@ -6,11 +6,16 @@ alias tree='eza --tree --icons'
 
 alias c='clear'
 
-alias che='chezmoi'
-alias chee='chezmoi edit'
-alias chec='chezmoi cd'
-alias chea='chezmoi apply -v'
-alias edit_config='chezmoi edit'
+alias moi='chezmoi'
+alias moie='chezmoi edit'
+alias moia='chezmoi apply -v'
+
+alias moiw='chezmoi edit --watch'
+
+alias moic='chezmoi cd'
+alias moi_eidt='chezmoi edit'
+
+alias rmoi='rootmoi'
 
 # Aria2 管理
 alias aria2-start='systemctl --user start aria2.service'
