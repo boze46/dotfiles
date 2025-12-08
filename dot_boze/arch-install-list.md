@@ -13,3 +13,16 @@ ttf-sarasa_ui-sc
 
 ##
 - thunar
+
+
+## keyd
+
+```fish
+# 3. 启动并启用服务
+sudo systemctl enable --now keyd
+# 4. 测试（修改配置后重载）
+sudo keyd reload
+```
+
+
+```
