@@ -1,6 +1,6 @@
 [tools]
 bun = "latest"
-node = "lts"
+node = "24"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@boze46/dirate" = "latest"
 "npm:@openai/codex" = "latest"
