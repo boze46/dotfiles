@@ -14,7 +14,13 @@
 │   ├── starship.toml       # Starship 提示符配置
 │   └── ...
 ├── dot_gitconfig.tmpl      # Git 配置模板
-└── private_dot_ssh/        # SSH 配置
+├── private_dot_ssh/        # SSH 配置
+├── dot_local/bin/          # 本地可执行文件
+│   └── rootmoi.tmpl        # rootmoi 工具
+└── root/                   # Root 权限配置文件（通过 rootmoi 管理）
+    └── etc/                # 系统级配置
+        ├── locale.conf     # 系统级 locale 配置
+        └── ...
 ```
 
 ## Git Commit 规范
@@ -28,6 +34,19 @@
 
 [可选的详细说明]
 ```
+
+**特殊格式：Root 配置文件**
+
+对于 `root/` 目录下的配置文件，使用特殊的作用域格式：
+
+```
+<类型>-root(<子作用域>): <简洁描述>
+```
+
+例如：
+- `feat-root(locale): 添加系统级 locale 配置`
+- `fix-root(keyd): 修复键盘映射配置`
+- `refactor-root(pacman): 优化软件包管理器配置`
 
 **重要**：不要添加任何自动生成的签名或标记（如 "Generated with Claude Code"、"Co-Authored-By" 等）。
 
@@ -72,16 +91,45 @@
 - `env`: 环境变量、全局配置
 - `chezmoi`: chezmoi 本身的配置
 
+#### Root 配置文件作用域
+
+对于 `root/` 目录下的系统级配置文件，使用 `<类型>-root(<子作用域>)` 格式：
+
+| 子作用域 | 说明 | 文件位置 |
+|---------|------|----------|
+| `locale` | 系统级语言配置 | `root/etc/locale.conf` |
+| `keyd` | 键盘映射配置 | `root/etc/keyd/` |
+| `pacman` | 软件包管理器 | `root/etc/pacman.conf` |
+| `systemd` | 系统级服务 | `root/etc/systemd/` |
+| `sysctl` | 内核参数 | `root/etc/sysctl.d/` |
+| `modules` | 内核模块 | `root/etc/modules-load.d/` |
+
+**示例**：
+```
+feat-root(locale): 添加系统级 locale 配置
+fix-root(keyd): 修复 Caps Lock 重映射问题
+refactor-root(pacman): 优化镜像源配置
+```
+
 ### 描述规范
 
 #### ✅ 好的描述示例
 
+**普通配置文件：**
 ```
 feat(fish): 添加 yazi 目录跟随函数
 feat(niri): 重构快捷键布局为 WASD 方案
 fix(kitty): 修复鼠标滚动自动选中文本问题
 feat(git): 模板化 gitconfig 按主机切换凭证
 refactor(niri): 调整启动器快捷键为 Alt+Space
+```
+
+**Root 配置文件：**
+```
+feat-root(locale): 添加系统级 locale 配置
+fix-root(keyd): 修复 Caps Lock 到 Escape 的映射
+refactor-root(pacman): 优化 mirrorlist 配置
+feat-root(systemd): 添加自动挂载服务配置
 ```
 
 #### ❌ 不好的描述示例
@@ -178,6 +226,62 @@ feat(niri): 模板化配置并按主机设置显示器
 - 以 `private_` 开头的文件/目录会被 chezmoi 设置为私密权限
 - 通常用于 SSH 密钥、凭证等敏感配置
 
+### Root 配置文件（root/）
+
+`root/` 目录专门用于存放需要 root 权限的系统级配置文件。
+
+#### 目录结构
+
+```
+root/
+└── etc/                    # 对应系统 /etc 目录
+    ├── locale.conf         # 系统级 locale 配置
+    ├── keyd/               # 键盘映射配置
+    │   └── default.conf
+    ├── pacman.conf         # 软件包管理器配置
+    └── ...
+```
+
+#### 使用 rootmoi 工具
+
+`rootmoi` 是 chezmoi 的包装工具，用于管理 root 配置：
+
+```bash
+# 查看 root 配置差异
+rootmoi diff
+
+# 应用 root 配置（需要 sudo 权限）
+rootmoi apply -v
+
+# 编辑 root 配置文件
+rootmoi edit /etc/locale.conf
+
+# 添加新的 root 配置文件到 chezmoi
+rootmoi add /etc/keyd/default.conf
+```
+
+#### Commit 规范
+
+Root 配置文件使用特殊的 commit 格式：`<类型>-root(<子作用域>)`
+
+**示例：**
+```bash
+# 添加新的系统配置
+git commit -m "feat-root(locale): 添加系统级 locale 配置"
+
+# 修复配置问题
+git commit -m "fix-root(keyd): 修复 Caps Lock 映射问题"
+
+# 重构配置
+git commit -m "refactor-root(pacman): 优化镜像源配置"
+```
+
+**注意事项：**
+1. Root 配置文件的改动需要使用 `rootmoi apply` 才能生效
+2. 提交时不要包含敏感信息（密码、密钥等）
+3. 提交前应该测试配置是否正常工作
+4. 使用 `feat-root`/`fix-root`/`refactor-root` 等格式区分普通配置
+
 ## 提交检查清单
 
 在提交前确认：
@@ -224,6 +328,15 @@ feat(starship): 添加 git 状态显示
 ```
 refactor(niri): 简化工作区配置
 refactor(fish): 重组环境变量加载逻辑
+```
+
+### Root 配置文件相关
+
+```
+feat-root(locale): 添加系统级 locale 配置
+fix-root(keyd): 修复键盘映射配置错误
+refactor-root(pacman): 优化软件源配置
+feat-root(systemd): 添加系统级自动挂载服务
 ```
 
 ## 注意事项
