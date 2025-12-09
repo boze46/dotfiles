@@ -3,6 +3,7 @@
 - fcitx5-rime
 - fcitx5-configtool
 - rime-wanxiang-flypy
+- fcitx5-skin-ori-git
 
 ## 字体
 nerd-fonts-sarasa-term
@@ -26,3 +27,6 @@ sudo keyd reload
 
 
 ```
+## 剪切板
+
+cliphist
