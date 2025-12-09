@@ -8,5 +8,8 @@
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
 spawn-at-startup "polkit-kde-authentication-agent"
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+
+// cliphist 剪切板配置
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
