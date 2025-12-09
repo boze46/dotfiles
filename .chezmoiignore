@@ -59,3 +59,8 @@ node_modules/
 # {{- if ne .chezmoi.hostname "BozeApex" }}
 # dot_config/某个配置/
 # {{- end }}
+#
+
+# # 忽略 root 目录，它由 rootmoi 单独管理
+root/
+root/**
