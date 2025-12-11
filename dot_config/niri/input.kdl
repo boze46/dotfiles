@@ -17,7 +17,7 @@ input {
         accel-profile "flat" 
     }
     // 始终选中鼠标所选窗口
-    focus-follows-mouse
+    // focus-follows-mouse
 
     
 
@@ -28,4 +28,7 @@ input {
     }
     // 工作区
     workspace-auto-back-and-forth
+    // 关机
+    disable-power-key-handling
+
 }
