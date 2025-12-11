@@ -1,0 +1,9 @@
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "cfb9140"
+hash = "b5067143415bd2d46c0dfa57319ddcef"
+
+[[flavor.deps]]
+use = "BennyOe/tokyo-night"
+rev = "5f56364"
+hash = "c0bf69ad2c44005892d586e9693993c6"

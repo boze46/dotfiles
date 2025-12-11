@@ -1,0 +1,25 @@
+[mgr]
+# 左中右三栏比例
+ratio = [1, 4, 4]
+
+# 排序方式
+sort_by = "natural"
+
+# 右侧显示信息
+linemode = "mtime"
+
+# 显示软链接的原链接
+show_symlink = true
+
+
+[preview]
+# 自动换行
+wrap = "yes"
+
+# tab_size
+#
+
+
+[[plugin.prepend_previewers]]
+mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}"
+run  = "ouch"
