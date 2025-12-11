@@ -3,7 +3,7 @@
 // ════════════════════════════════════════════════════════════════
 
 
-{{- if eq .chezmoi.hostname "BozePatience" }}
+{{- if eq .chezmoi.hostname .BozePC }}
 output "Shenzhen KTC Technology Group H27T22 0x00000001" {
     mode "2560x1440@143.995"
     scale 1.25
@@ -31,8 +31,7 @@ output "Xiaomi Corporation Mi monitor 5323110156479" {
         }
     }
 }
-{{- end }}
-{{- if ne .chezmoi.hostname "BozePatience" }}
+{{- else if eq .chezmoi.hostname .BozeCompany }}
 output "DP-1" {
     mode "1920x1080@60.000"
     scale 1

@@ -1,8 +1,20 @@
 window-rule {
-    match app-id="utools"
-    open-focused false
-    // 可选:设置为浮动窗口
+  match app-id="com.mitchellh.ghostty"
+  default-column-width { proportion 0.33333; }
+}
+
+window-rule {
+    // 匹配 utools 窗口
+    match app-id="^utools$"
+    
+    // 关键配置：阻止窗口获取焦点
+    // block-out-from "focus-change"
+    
+    // 可选：让窗口浮动在其他窗口之上
     open-floating true
+    
+    // 可选：设置窗口始终在最上层
+    open-on-output "*"
 }
 
 window-rule {
