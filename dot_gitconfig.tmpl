@@ -1,15 +1,130 @@
 [user]
 	name = boze
-	email = boze3141@gmail.com
-{{- if ne .chezmoi.hostname "BozeApex" }}
+  email = boze462@gmail.com
+  # 使用 SSH 密钥签名提交
+  # signingkey = ~/.ssh/boze_ssh_id
+
+[init]
+    # 默认分支名为 main
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    # 全局 gitignore（Arch/IDE 临时文件）
+    excludesfile = ~/.config/git/ignore
+    # 使用 delta 作为分页器
+    pager = delta
+
+[delta]
+    # Delta 配置（适配 Wayland/Niri 终端）
+    navigate = true
+    light = false
+    side-by-side = true
+    line-numbers = true
+
+[interactive]
+    # 在 git add -p 时也使用 delta 语法高亮
+    diffFilter = delta --color-only
+
+[pull]
+    # 防止意外创建 merge commit，只允许 fast-forward
+    # ff = only
+    # 或者使用 rebase = true（二选一，推荐 ff only）
+    rebase = true
+
+[push]
+    # 自动设置上游分支，首次 push 无需 -u
+    autoSetupRemote = true
+    # 同时推送相关的 tags
+    followTags = true
+
+[merge]
+    # 使用 zdiff3 显示冲突（显示原始版本+两侧修改）
+    conflictstyle = zdiff3
+    # 不保留 .orig 备份文件
+    keepBackup = false
+    # 使用 meld 作为合并工具（Wayland 兼容）
+    # tool = meld
+
+[diff]
+    # 使用 histogram 算法（处理函数重排更清晰）
+    algorithm = histogram
+    # 高亮移动的代码块
+    colorMoved = default
+    # 忽略缩进变化
+    colorMovedWS = allow-indentation-change
+    # 使用 difftastic 作为外部 diff 工具（可选，需安装）
+    # tool = difftastic
+
+[rebase]
+    # 自动应用 --fixup 和 --squash 提交
+    autoSquash = true
+    # rebase 前自动 stash，完成后 pop
+    autoStash = true
+    # 防止意外删除提交
+    missingCommitsCheck = error
+    # 自动更新依赖分支（stacked branches）
+    updateRefs = true
+
+[commit]
+    # 提交时显示完整 diff（帮助写更好的 commit message）
+    verbose = true
+    # 使用 SSH 密钥签名（可选，需配置 GPG）
+    # gpgsign = true
+
+[branch]
+    # 按最近使用时间排序分支（而非字母序）
+    sort = -committerdate
+
+[tag]
+    # 按时间排序 tags
+    sort = taggerdate
+
+[fetch]
+    # 自动删除远程已删除的分支
+    prune = true
+    pruneTags = true
+    # 数据完整性检查
+    fsckobjects = true
+
+[transfer]
+    # 传输时检查对象完整性（防止数据损坏）
+    fsckobjects = true
+[receive]
+    fsckObjects = true
+[rerere]
+    # 记住冲突解决方案，rebase 时自动应用
+    enabled = true
+
+[help]
+    # 自动纠正拼写错误（1秒后执行）
+    autocorrect = prompt
+
+[log]
+    # 使用 ISO 格式显示日期
+    date = iso
+
+# [blame]
+    # 忽略格式化提交（需创建 .git-blame-ignore-revs）
+    # ignoreRevsFile = .git-blame-ignore-revs
+# [gpg]
+    # 使用 SSH 密钥签名（现代方式，无需 GPG）
+    # format = ssh
+
+[url "git@github.com:"]
+    # 自动将 HTTPS 替换为 SSH（避免输密码）
+    insteadOf = https://github.com/
+# 可选：为工作和个人项目使用不同配置
+# [includeIf "gitdir:~/work/"]
+#     path = ~/.config/git/work.gitconfig
+# [includeIf "gitdir:~/personal/"]
+#     path = ~/.config/git/personal.gitconfig
+
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
-[init]
-	defaultBranch = main
 [credential]
 	helper = store
-{{- end }}
