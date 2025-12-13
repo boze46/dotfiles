@@ -6,3 +6,6 @@ patch:
       - F6
   switcher/fold_options: false
   menu/page_size: 5
+
+  # 候选设置
+  recognizer/patterns/boze: "^boze[0-9]+$"
