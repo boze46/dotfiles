@@ -1,4 +1,39 @@
 Host *
+    # 安全性配置
+    # 优先使用更安全的密钥交换算法（Ed25519 > ECDSA > RSA）
+    HostKeyAlgorithms ssh-ed25519,ecdsa-sha2-nistp256,rsa-sha2-512,rsa-sha2-256
+    Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
+    KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+
+    # 连接保活配置（防止长时间无操作断连）
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    TCPKeepAlive yes
+
+    # 连接复用（大幅提升多次连接速度）
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h:%p
+    ControlPersist 10m
+
+    # 认证配置
+    PubkeyAuthentication yes
+    PasswordAuthentication yes
+    ChallengeResponseAuthentication no
+
+    # 转发配置（Wayland 环境下的特殊处理）
+    # X11 转发在 Wayland 下通过 XWayland 工作
+    ForwardX11 no
+    ForwardX11Trusted no
+
+    # 其他优化
+    HashKnownHosts yes              # 混淆 known_hosts 中的主机名
     AddKeysToAgent yes
+    StrictHostKeyChecking ask       # 首次连接时询问
+    VerifyHostKeyDNS yes            # 通过 DNS 验证主机密
+
+    # 连接超时
+    ConnectTimeout 10
+
     IdentityFile ~/.ssh/boze_ssh_id
 
