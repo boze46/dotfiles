@@ -18,20 +18,14 @@ include "config/04-binds.kdl"
 // 自启动应用 | Startup Applications
 include "config/05-startup.kdl"
 
-prefer-no-csd
-screenshot-path null
-
-
 // 动画设置 | Animation Settings
 include "config/06-animations.kdl"
 
 // 窗口规则 | Window Rules
 include "config/07-rules.kdl"
 
-// Notalia
-{{- if eq .chezmoi.hostname "BozePatience" }}
-include "config/08-noctalia.kdl"
-{{- end }}
-
-
+// 杂项 | Misc
 include "config/09-misc.kdl"
+
+// 特殊 | Notalia
+include "config/90-noctalia.kdl"

@@ -1,3 +1,6 @@
+prefer-no-csd
+screenshot-path null
+
 // 快捷键提示 | Hotkey overlay
 hotkey-overlay {
     skip-at-startup
