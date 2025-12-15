@@ -1,12 +1,11 @@
 [tools]
 bun = "latest"
-node = "24"
+node = "22"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@boze46/dirate" = "latest"
 "npm:@openai/codex" = "latest"
 "npm:degit" = "latest"
 python = "3.12"
-usage = "latest"
 uv = "latest"
 
 [settings]
