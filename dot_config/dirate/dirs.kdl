@@ -27,11 +27,7 @@ home {
   media {
     videos
     music "audio"
-    pictures "images" {
-      // Non-user-dirs are created as-is
-      bg
-      avatar
-    }
+    pictures "images" 
   }
 
   // Any extra non-user-dirs you want Dirate to create
