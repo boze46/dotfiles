@@ -1,9 +1,16 @@
+{{ $passphrase := promptStringOnce . "passphrase" "passphrase" -}}
 sourceDir = "{{ .chezmoi.sourceDir }}"
 
+encryption = "gpg"
 [data]
-BozePC = "BozePatience"
-BozeCompany = "BozeYX"
-email = "boze462@gmail.com"
+    BozePC = "BozePatience"
+    BozeCompany = "BozeYX"
+    email = "boze462@gmail.com"
+    passphrase = {{ $passphrase | quote }}
+
+[gpg]
+    symmetric = true
+    args = ["--batch", "--passphrase", {{ $passphrase | quote }}, "--no-symkey-cache"]
 
 [merge]
     command = "nvim"
