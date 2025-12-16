@@ -1,0 +1,32 @@
+#!/usr/bin/env fish
+# chezmoi:template:left-delimiter="# {{" right-delimiter=}}
+
+set rootmoi_path '# {{ joinPath .chezmoi.homeDir ".local/bin/rootmoi" }}'
+set original_args # {{ rest .chezmoi.args | quoteList | join " " }}
+
+set -q NO_ROOTMOI; and exit 0
+
+set -l args apply --no-pager
+set -l i 1
+
+while test $i -le (count $original_args)
+    set -l arg $original_args[$i]
+
+    # Skip these patterns and their potential values
+    switch $arg
+        case -S --source
+            set i (math $i + 2) # Skip this and next arg
+            continue
+        case '-S=*' '--source=*' -a '-a=*' --apply '--apply=*' --init
+            set i (math $i + 1)
+            continue
+        case '-*'
+            set -a args $arg
+    end
+
+    set i (math $i + 1)
+end
+
+echo "执行 rootmoi..."
+echo "rootmoi $args"
+exec $rootmoi_path $args

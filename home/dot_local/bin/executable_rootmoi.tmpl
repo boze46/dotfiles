@@ -1,0 +1,50 @@
+#!/usr/bin/env fish
+# rootmoi - chezmoi wrapper for managing root-owned files
+# 这个脚本允许你使用 chezmoi 管理需要 root 权限的系统文件
+
+# 定义 rootmoi 的配置路径
+# 这些路径在用户的 home 目录下，避免污染 root 的配置
+
+set -l config_dir "{{ joinPath .chezmoi.homeDir ".config/rootmoi" }}"
+set -l config_file "{{ joinPath .chezmoi.homeDir ".config/rootmoi/chezmoi.yaml" }}"
+set -l persistent_state_file "{{ joinPath .chezmoi.homeDir ".config/rootmoi/chezmoistate.boltdb" }}"
+set -l cache_dir "{{ joinPath .chezmoi.homeDir ".cache/rootmoi" }}"
+set -l source_dir "{{ .chezmoi.workingTree }}/root"
+set -l dest_dir /
+
+# 确定 chezmoi 可执行文件的位置
+# 因为在安装过程中可能会移除 chezmoi，所以需要动态查找
+set -l cmoi ""
+if test -f '{{ .chezmoi.executable }}'
+    # 使用模板中指定的 chezmoi 可执行文件路径
+    set cmoi '{{ .chezmoi.executable }}'
+else
+    # 从 PATH 中查找 chezmoi
+    set cmoi (command -v chezmoi)
+
+    # 如果找不到 chezmoi，报错退出
+    if test -z "$cmoi"
+        echo "错误: 找不到 chezmoi 可执行文件" >&2
+        exit 1
+    end
+end
+
+# 预先创建必要的目录
+# 重要：这些目录必须在 sudo 之前创建，否则会以 root 身份创建
+# 这可能导致 ~/.cache 和 ~/.config 的权限问题，影响其他程序的正常运行
+for dir in $config_dir $cache_dir
+    test -d "$dir" || mkdir -p "$dir"
+end
+
+# 使用 sudo 执行 chezmoi，并传递所有参数
+# --preserve-env=PATH: 保留当前用户的 PATH 环境变量，确保能找到必要的工具
+# exec: 用 sudo 进程替换当前 shell 进程（Fish 中 exec 不需要 -- 分隔符）
+#
+# 转发所有参数给 chezmoi，但使用 root 的配置
+exec sudo --preserve-env=PATH -- \
+    $cmoi $argv \
+    --source $source_dir \
+    --destination $dest_dir \
+    --config="$config_file" \
+    --persistent-state="$persistent_state_file" \
+    --cache="$cache_dir"
