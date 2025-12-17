@@ -1,0 +1,32 @@
+[Unit]
+Description=Mihomo Proxy Service
+Documentation=https://wiki.metacubex.one/
+After=network-online.target waydroid-container.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+
+# Mihomo 二进制文件路径（根据你的实际安装位置调整）
+ExecStart=/usr/bin/mihomo -d /etc/mihomo
+
+# 优雅重载配置（不中断连接）
+ExecReload=/bin/kill -HUP $MAINPID
+
+Restart=on-failure
+RestartSec=5s
+
+# 安全加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/etc/mihomo
+
+# 资源限制
+LimitNOFILE=1048576
+LimitNPROC=512
+
+[Install]
+WantedBy=multi-user.target
