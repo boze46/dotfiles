@@ -9,11 +9,12 @@ alias c='clear'
 alias moi='chezmoi'
 alias moie='chezmoi edit'
 alias moia='chezmoi apply -v'
+alias moim='chezmoi merge'
+alias moima='chezmoi merge-all'
 
 alias moiw='chezmoi edit --watch'
 
 alias moic='chezmoi cd'
-alias moi_eidt='chezmoi edit'
 
 alias rmoi='rootmoi'
 
