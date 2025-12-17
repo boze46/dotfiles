@@ -1,0 +1,13 @@
+ddcci:
+  description: "DDC/CI driver configuration for AMD GPU"
+  files:
+    - /etc/modules-load.d/i2c.conf
+    - /etc/modules-load.d/ddcci.conf
+    - /etc/modules-load.d/ddcci_backlight.conf
+    - /etc/udev/rules.d/45-ddcci-backlight.rules
+    - /etc/systemd/system/ddcci-attach.service
+    - /usr/local/bin/ddcci-attach.sh
+  notes: |
+    After applying, user must be in 'video' group.
+    Run: sudo usermod -aG video $USER
+

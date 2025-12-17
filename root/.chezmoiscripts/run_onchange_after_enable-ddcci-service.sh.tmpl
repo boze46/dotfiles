@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+# Hash: {{ include "/etc/systemd/system/ddcci-attach.service" | sha256sum }}
+systemctl daemon-reload
+systemctl enable ddcci-attach.service
+systemctl restart ddcci-attach.service

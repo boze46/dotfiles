@@ -1,6 +1,7 @@
 {{- $passphrase := promptStringOnce . "passphrase" "passphrase" -}}
 sourceDir: {{ .chezmoi.sourceDir | quote }}
 encryption: gpg
+umask: 0o022  # 确保创建的文件是 644，目录是 755
 data:
   BozePC: BozePatience
   BozeCompany: BozeYX
