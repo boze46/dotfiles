@@ -18,6 +18,8 @@ alias moic='chezmoi cd'
 
 alias rmoi='rootmoi'
 
+alias lzg='lazygit'
+
 # Aria2 管理
 alias aria2-start='systemctl --user start aria2.service'
 alias aria2-stop='systemctl --user stop aria2.service'

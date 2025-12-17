@@ -17,6 +17,7 @@ home {
   // Keep the same name
   desktop
 
+
   // Group user-dirs under a custom folder
   system {
     templates "tmpl"
@@ -32,4 +33,5 @@ home {
 
   // Any extra non-user-dirs you want Dirate to create
   projects
+  games
 }
