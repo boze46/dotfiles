@@ -3,18 +3,14 @@ window-rule {
   default-column-width { proportion 0.33333; }
 }
 
+// Monster Hunter Wilds
 window-rule {
-    // 匹配 utools 窗口
-    match app-id="^utools$"
-    
-    // 关键配置：阻止窗口获取焦点
-    // block-out-from "focus-change"
-    
-    // 可选：让窗口浮动在其他窗口之上
-    open-floating true
-    
-    // 可选：设置窗口始终在最上层
-    open-on-output "*"
+  match title="Monster Hunter Wilds"
+  match app-id="steam_app_2246340"
+
+  open-fullscreen true
+
+  open-on-output "Xiaomi Corporation Mi monitor 5323110156479"
 }
 
 window-rule {
