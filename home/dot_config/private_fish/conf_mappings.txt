@@ -1,0 +1,3 @@
+nvim /home/boze/.config/nvim
+niri /home/boze/.config/niri
+fish /home/boze/.config/fish
