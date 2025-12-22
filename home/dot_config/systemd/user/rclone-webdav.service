@@ -1,0 +1,20 @@
+[Unit]
+Description=RClone WebDAV Mount
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStartPre=/usr/bin/mkdir -p %h/system/webdav
+ExecStart=/usr/bin/rclone mount BozeWebdav: %h/system/webdav \
+    --vfs-cache-mode full \
+    --vfs-cache-max-age 6h \
+    --vfs-cache-max-size 20G \
+    --log-level INFO
+ExecStop=/usr/bin/fusermount -u %h/system/webdav
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+
