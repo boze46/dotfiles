@@ -17,8 +17,8 @@ merge:
   command: nvim
   args:
     - -d
-    - {{ printf "%q" "{{ .Destination }}" }}
     - {{ printf "%q" "{{ .Source }}" }}
+    - {{ printf "%q" "{{ .Destination }}" }}
     - {{ printf "%q" "{{ .Target }}" }}
 diff:
   pager: delta
