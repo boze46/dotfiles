@@ -1,14 +1,19 @@
 [tools]
 bun = "latest"
+dart = "latest"
+flutter = "latest"
+go = "latest"
 node = "22"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@boze46/dirate" = "latest"
 "npm:@openai/codex" = "latest"
 "npm:degit" = "latest"
-python = "3.12"
+"npm:nnrm" = "latest"
+pnpm = "latest"
 uv = "latest"
+yarn = "1"
 
 [settings]
 
 [settings.node]
-mirror_url = "https://mirrors.ustc.edu.cn/node/"
+mirror_url = "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
