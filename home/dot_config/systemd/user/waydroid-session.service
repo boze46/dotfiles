@@ -1,0 +1,14 @@
+[Unit]
+Description=Waydroid Session
+After=waydroid-container.service
+# Requires=waydroid-container.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/waydroid session start
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+
