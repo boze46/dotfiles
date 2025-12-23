@@ -3,14 +3,22 @@ window-rule {
   default-column-width { proportion 0.33333; }
 }
 
+window-rule {
+  match title="好友列表" app-id="steam"
+  open-floating true
+}
+
 // Monster Hunter Wilds
 window-rule {
   match title="Monster Hunter Wilds"
   match app-id="steam_app_2246340"
+  match app-id="steam_app_1446780"
+
+  match title="Hollow Knight Silksong"
+  match app-id="Hollow Knight Silksong"
 
   open-fullscreen true
-
-  open-on-output "Xiaomi Corporation Mi monitor 5323110156479"
+  open-on-output "DP-1"
 }
 
 window-rule {
