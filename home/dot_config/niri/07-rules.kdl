@@ -1,5 +1,6 @@
 window-rule {
   match app-id="com.mitchellh.ghostty"
+  match app-id="kitty"
   default-column-width { proportion 0.33333; }
 }
 
@@ -49,7 +50,7 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 4
     clip-to-geometry true
     tiled-state true
     draw-border-with-background false

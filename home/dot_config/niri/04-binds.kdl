@@ -14,6 +14,7 @@ binds {
     MOD+B           hotkey-overlay-title="浏览器 Browser: zen-browser" { spawn "zen-browser"; }
     MOD+N           hotkey-overlay-title="文件管理器 Files: nemo"  { spawn "nemo"; }
     MOD+ALT+L       hotkey-overlay-title="锁屏 Lock: swaylock"         { spawn "swaylock"; }
+    MOD+Slash       hotkey-overlay-title="展示快捷键"                     {show-hotkey-overlay;}
 
     // ──────────────────────────────────────────────────────────
     // 音频控制 | Audio Controls
@@ -34,11 +35,16 @@ binds {
     MOD+TAB               repeat=false hotkey-overlay-title="切换概览模式" { toggle-overview; }
 
     // 焦点切换 | Focus movement (WASD 布局 - 最高优先级)
-    MOD+W           hotkey-overlay-title="聚焦上方窗口/工作区"     { focus-window-or-workspace-up; }
-    MOD+S           hotkey-overlay-title="聚焦下方窗口/工作区"     { focus-window-or-workspace-down; }
-    MOD+A           hotkey-overlay-title="聚焦左侧列"              { focus-column-left; }
-    MOD+D           hotkey-overlay-title="聚焦右侧列"              { focus-column-right; }
+    // MOD+W           hotkey-overlay-title="聚焦上方窗口/工作区"     { focus-window-or-workspace-up; }
+    // MOD+S           hotkey-overlay-title="聚焦下方窗口/工作区"     { focus-window-or-workspace-down; }
+    // MOD+A           hotkey-overlay-title="聚焦左侧列"              { focus-column-left; }
+    // MOD+D           hotkey-overlay-title="聚焦右侧列"              { focus-column-right; }
     MOD+E           hotkey-overlay-title="聚焦到另一个显示器"      { focus-monitor-next; }
+
+    MOD+W           hotkey-overlay-title="聚焦上方窗口/工作区"     { spawn "vim-niri-nav" "up" "w"; }
+    MOD+S           hotkey-overlay-title="聚焦下方窗口/工作区"     { spawn "vim-niri-nav" "down" "w"; }
+    MOD+A           hotkey-overlay-title="聚焦左侧列"              { spawn "vim-niri-nav" "left";}
+    MOD+D           hotkey-overlay-title="聚焦右侧列"              { spawn "vim-niri-nav" "right"; }
 
     MOD+UP          hotkey-overlay-title="聚焦上方窗口/工作区"     { focus-window-or-workspace-up; }
     MOD+DOWN        hotkey-overlay-title="聚焦下方窗口/工作区"     { focus-window-or-workspace-down; }
@@ -137,7 +143,7 @@ binds {
     // ──────────────────────────────────────────────────────────
     // 截图 | Screenshots
     // ──────────────────────────────────────────────────────────
-    CTRL+SHIFT+1 { screenshot; }
+   
     CTRL+SHIFT+2 { screenshot-screen; }
     CTRL+SHIFT+3 { screenshot-window; }
 
@@ -146,5 +152,5 @@ binds {
     // ──────────────────────────────────────────────────────────
     MOD+ESCAPE          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     MOD+ALT+P           { power-off-monitors; }
-    CTRL+ALT+DELETE     { quit; }
+    MOD+M hotkey-overlay-title="退出"     { quit; }
 }
