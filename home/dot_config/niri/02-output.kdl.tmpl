@@ -1,0 +1,50 @@
+// ════════════════════════════════════════════════════════════════
+// 显示器配置 | Output Configuration
+// ════════════════════════════════════════════════════════════════
+
+
+{{- if eq .chezmoi.hostname .BozePC }}
+output "Xiaomi Corporation Mi monitor 5323110156479" {
+    mode "3440x1440@180.000"
+    scale 1.25
+    position x=0 y=0
+    focus-at-startup
+
+    layout {
+        preset-column-widths {
+            proportion 0.25
+            proportion 0.5
+            proportion 0.75
+            proportion 1.0
+        }
+    }
+}
+output "Shenzhen KTC Technology Group H27T22S-3 Pro 0000000000000" {
+  mode "2560x1440@220.001"
+  scale 1.25
+  position x=352 y=1152
+
+  layout {
+        preset-column-widths {
+            proportion 0.33333
+            proportion 0.66667
+            proportion 1.0
+        }
+    }
+}
+
+{{- else if eq .chezmoi.hostname .BozeCompany }}
+output "DP-1" {
+    mode "1920x1080@60.000"
+    scale 1
+    position x=0 y=0
+    focus-at-startup
+    layout {
+        preset-column-widths {
+            proportion 0.33333
+            proportion 0.66667
+            proportion 1.0
+        }
+    }
+}
+{{- end }}
