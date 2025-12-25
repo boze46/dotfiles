@@ -21,4 +21,5 @@ merge:
     - {{ printf "%q" "{{ .Destination }}" }}
     - {{ printf "%q" "{{ .Target }}" }}
 diff:
-  pager: delta
+  # pager: "difft --color=always"
+  pager: "bat --style=numbers,changes --paging=always"
