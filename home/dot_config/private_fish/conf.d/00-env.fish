@@ -17,5 +17,3 @@ set -gx NPM_CONFIG_PREFIX "$XDG_DATA_HOME/npm"
 set -gx NODE_REPL_HISTORY "$XDG_DATA_HOME/node_repl_history"
 
 set -gx SSH_AUTH_SOCK "$HOME/.bitwarden-ssh-agent.sock"
-
-set -gx TERM xterm-256color
