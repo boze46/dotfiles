@@ -9,8 +9,8 @@ binds {
     // ──────────────────────────────────────────────────────────
     // 应用启动 | Application Launcher
     // ──────────────────────────────────────────────────────────
-    MOD+RETURN      hotkey-overlay-title="终端 Terminal: kitty"        { spawn "kitty"; }
-    ALT+SPACE       hotkey-overlay-title="启动器 Launcher: fuzzel"       { spawn "fuzzel"; }
+    MOD+RETURN      hotkey-overlay-title="终端 Terminal: ghostty"        { spawn "ghostty" " +new-window"; }
+    ALT+SPACE       hotkey-overlay-title="启动器 Launcher: rofi"       { spawn "rofi" "-show" "drun"; }
     MOD+B           hotkey-overlay-title="浏览器 Browser: zen-browser" { spawn "zen-browser"; }
     MOD+N           hotkey-overlay-title="文件管理器 Files: nemo"  { spawn "nemo"; }
     MOD+ALT+L       hotkey-overlay-title="锁屏 Lock: swaylock"         { spawn "swaylock"; }
@@ -46,10 +46,10 @@ binds {
     MOD+A           hotkey-overlay-title="聚焦左侧列"              { spawn "vim-niri-nav" "left";}
     MOD+D           hotkey-overlay-title="聚焦右侧列"              { spawn "vim-niri-nav" "right"; }
 
-    MOD+UP          hotkey-overlay-title="聚焦上方窗口/工作区"     { focus-window-or-workspace-up; }
-    MOD+DOWN        hotkey-overlay-title="聚焦下方窗口/工作区"     { focus-window-or-workspace-down; }
-    MOD+LEFT        hotkey-overlay-title="聚焦左侧列"              { focus-column-left-or-last; }
-    MOD+RIGHT       hotkey-overlay-title="聚焦右侧列"              { focus-column-right-or-first; }
+    // MOD+UP          hotkey-overlay-title="聚焦上方窗口/工作区"     { focus-window-or-workspace-up; }
+    // MOD+DOWN        hotkey-overlay-title="聚焦下方窗口/工作区"     { focus-window-or-workspace-down; }
+    // MOD+LEFT        hotkey-overlay-title="聚焦左侧列"              { focus-column-left-or-last; }
+    // MOD+RIGHT       hotkey-overlay-title="聚焦右侧列"              { focus-column-right-or-first; }
 
     // 窗口/列移动 | Window/Column movement (MOD+ALT+WASD)
     MOD+ALT+W       hotkey-overlay-title="移动窗口到上方" { move-window-up-or-to-workspace-up; }
@@ -58,10 +58,10 @@ binds {
     MOD+ALT+D           hotkey-overlay-title="移动窗口到右方"              { move-column-right; }
     MOD+ALT+E           hotkey-overlay-title="移动窗口到另一个显示器"              { move-window-to-monitor-next; }
 
-    MOD+ALT+UP      hotkey-overlay-title="移动窗口到上方" {  move-window-up-or-to-workspace-up; }
-    MOD+ALT+DOWN    hotkey-overlay-title="移动窗口到下方" { move-window-down-or-to-workspace-down; }
-    MOD+ALT+LEFT    hotkey-overlay-title="移动列到左侧"  { consume-or-expel-window-left; }
-    MOD+ALT+RIGHT   hotkey-overlay-title="移动列到右侧"  { consume-or-expel-window-right; }
+    // MOD+ALT+UP      hotkey-overlay-title="移动窗口到上方" {  move-window-up-or-to-workspace-up; }
+    // MOD+ALT+DOWN    hotkey-overlay-title="移动窗口到下方" { move-window-down-or-to-workspace-down; }
+    // MOD+ALT+LEFT    hotkey-overlay-title="移动列到左侧"  { consume-or-expel-window-left; }
+    // MOD+ALT+RIGHT   hotkey-overlay-title="移动列到右侧"  { consume-or-expel-window-right; }
 
     // 快速跳转 | Quick jump
     MOD+HOME        hotkey-overlay-title="跳转到第一列"  { focus-column-first; }
