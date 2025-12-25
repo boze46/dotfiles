@@ -22,6 +22,6 @@ merge:
     - {{ printf "%q" "{{ .Destination }}" }}
     - {{ printf "%q" "{{ .Target }}" }}
 diff:
-  pager: delta
+  pager: "bat --style=numbers,changes --paging=always"
 edit:
   command: nvim
