@@ -42,3 +42,5 @@ Host BozeYC
     User boze
     Port 22
     IdentityFile ~/.ssh/boze_ssh_id
+    PasswordAuthentication yes
+
