@@ -9,7 +9,7 @@ binds {
     // ──────────────────────────────────────────────────────────
     // 应用启动 | Application Launcher
     // ──────────────────────────────────────────────────────────
-    MOD+RETURN      hotkey-overlay-title="终端 Terminal: ghostty"        { spawn "ghostty" " +new-window"; }
+    MOD+RETURN      hotkey-overlay-title="终端 Terminal: ghostty"        { spawn "ghostty" "+new-window"; }
     ALT+SPACE       hotkey-overlay-title="启动器 Launcher: rofi"       { spawn "rofi" "-show" "drun"; }
     MOD+B           hotkey-overlay-title="浏览器 Browser: zen-browser" { spawn "zen-browser"; }
     MOD+N           hotkey-overlay-title="文件管理器 Files: nemo"  { spawn "nemo"; }

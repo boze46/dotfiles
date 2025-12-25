@@ -5,21 +5,42 @@ window-rule {
 }
 
 window-rule {
+    // 匹配所有 Wine 应用（通过 app-id 或 title）
+    match app-id="wine"
+    match app-id=".*\\.exe$"
+    
+    // 禁用 Niri 的服务端装饰
+    draw-border-with-background false
+  }
+
+window-rule {
   match title="好友列表" app-id="steam"
   open-floating true
 }
 
+window-rule {
+  match app-id="steam"
+  match app-id="steam_app_1446780"
+  match app-id="gamescope"
+
+  open-on-output "DP-1"
+}
 // Monster Hunter Wilds
 window-rule {
   match title="Monster Hunter Wilds"
   match app-id="steam_app_2246340"
-  match app-id="steam_app_1446780"
 
   match title="Hollow Knight Silksong"
   match app-id="Hollow Knight Silksong"
 
   open-fullscreen true
   open-on-output "DP-1"
+}
+
+window-rule {
+  // 全屏时禁用合成器重定向
+  // block-out-from "screencast"
+  // block-out-from "screen-capture"
 }
 
 window-rule {
