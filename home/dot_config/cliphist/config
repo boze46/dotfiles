@@ -1,0 +1,9 @@
+# cliphist 配置文件
+# 增加历史容量（适合重度使用）
+max-items 2000
+# 提高去重搜索范围（避免近期重复）
+max-dedupe-search 300
+# 过滤掉单字符或空白复制（减少噪音）
+min-store-length 2
+# 增加预览宽度（更好地识别内容）
+preview-width 150
