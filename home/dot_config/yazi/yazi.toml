@@ -11,6 +11,15 @@ linemode = "mtime"
 # 显示软链接的原链接
 show_symlink = true
 
+[opener]
+# 定义 wine opener
+wine = [
+    { run = 'wine "$@"', block = true, desc = "Run with Wine" }
+]
+
+[open]
+# 关联 .exe 文件到 wine opener
+exe = "wine"
 
 [preview]
 # 自动换行
