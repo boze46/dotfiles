@@ -1,8 +1,12 @@
 # 基础配置
-dir=inbox
-input-file=.config/aria2/aria2.session
-save-session=.config/aria2/aria2.session
+dir={{.chezmoi.homeDir}}/inbox
+input-file={{.chezmoi.homeDir}}/.config/aria2/aria2.session
+save-session={{.chezmoi.homeDir}}/.config/aria2/aria2.session
 save-session-interval=60
+# 日志
+log={{.chezmoi.homeDir}}/.config/aria2/aria2.log
+log-level=notice
+
 
 # 文件分配方式
 file-allocation=falloc
@@ -19,15 +23,11 @@ continue=true
 # 磁盘缓存
 disk-cache=64M
 
-# 日志
-log=.config/aria2/aria2.log
-log-level=notice
-
 # RPC 配置
 enable-rpc=true
 rpc-listen-all=false
 rpc-listen-port=6800
-rpc-secret=boze_aria2
+# rpc-secret=boze_aria2
 rpc-allow-origin-all=true
 
 # BT/PT 配置
