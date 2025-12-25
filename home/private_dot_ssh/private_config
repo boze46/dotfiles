@@ -37,3 +37,8 @@ Host *
 
     IdentityFile ~/.ssh/boze_ssh_id
 
+Host BozeYC
+    HostName boze31.com
+    User boze
+    Port 22
+    IdentityFile ~/.ssh/boze_ssh_id
