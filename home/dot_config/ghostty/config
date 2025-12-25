@@ -15,6 +15,9 @@ window-padding-color = extend
 font-family = monospace
 font-size = 14
 
+# 是否继承上一个窗口的工作目录
+window-inherit-working-directory = false
+
 # 调整单元格高度（改善行距）
 adjust-cell-height = 10%
 # 调整单元格宽度
